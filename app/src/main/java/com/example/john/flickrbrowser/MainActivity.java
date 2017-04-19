@@ -11,6 +11,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         GetRawData theRawData = new GetRawData("https://api.flickr.com/services/feeds/photos_public.gne?tags=nintendo,switch&format=json&lang=en-us&nojsoncallback=1");
-        theRawData.execute();
+        GetFlickrJsonData jsonData = new GetFlickrJsonData("nintendo, switch, nintendoswitch, zelda, botw", true);
+        jsonData.execute();
     }
 }
