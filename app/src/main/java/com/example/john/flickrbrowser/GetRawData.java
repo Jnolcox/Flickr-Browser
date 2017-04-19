@@ -12,13 +12,13 @@ import java.net.URL;
 
 
 enum DownloadStatus { IDLE, PROCESSING, NOT_INITIALISED, FAILED_OR_EMPTY, OK }
-public class getRawData {
-    private String LOG_TAG = getRawData.class.getSimpleName();
+public class GetRawData {
+    private String LOG_TAG = GetRawData.class.getSimpleName();
     private String mRawUrl;
     private String mData;
     private DownloadStatus mDownloadStatus;
 
-    public getRawData(String mRawUrl) {
+    public GetRawData(String mRawUrl) {
         this.mRawUrl = mRawUrl;
         this.mDownloadStatus = DownloadStatus.IDLE;
     }
@@ -35,6 +35,12 @@ public class getRawData {
 
     public DownloadStatus getmDownloadStatus() {
         return mDownloadStatus;
+    }
+
+    public void execute() {
+        this.mDownloadStatus = DownloadStatus.PROCESSING;
+        DownloadRawData downloadRawData = new DownloadRawData();
+        downloadRawData.execute(mRawUrl);
     }
 
     public class DownloadRawData extends AsyncTask<String, Void, String> {
