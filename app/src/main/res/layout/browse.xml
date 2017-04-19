@@ -5,15 +5,19 @@
     android:orientation="horizontal"
     android:padding="2dp">
 
-    <ImageView android:id="@+id/thumbnail"
-        android:layout_gravity="center_horizontal"
-        android:scaleType="fitCenter"
+    <ImageView
+        android:id="@+id/thumbnail"
         android:layout_width="80dp"
         android:layout_height="60dp"
-        android:src="@drawable/placeholder"/>
-    <TextView android:id="@+id/title"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="fitCenter"
+        android:src="@drawable/placeholder" />
+
+    <TextView
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:maxLines="3"/>
+        android:layout_marginLeft="3dp"
+        android:maxLines="3" />
 
 </LinearLayout>
