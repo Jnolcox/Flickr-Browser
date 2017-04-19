@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GetFlickrJsonData extends GetRawData {
@@ -18,6 +19,14 @@ public class GetFlickrJsonData extends GetRawData {
     public GetFlickrJsonData(String searchCriteria, boolean matchAll) {
         super(null);
         createAndUpdateUri(searchCriteria, matchAll);
+        mPhotos = new ArrayList<Photo>();
+    }
+
+    public void execute() {
+        super.setmRawUrl(mDestinationUri.toString());
+        DownloadJsonData downloadJsonData = new DownloadJsonData();
+        Log.v(LOG_TAG, "Built URI = " + mDestinationUri.toString());
+        downloadJsonData.execute(mDestinationUri.toString());
     }
 
     public boolean createAndUpdateUri(String searchCriteria, boolean matchAll) {
@@ -70,6 +79,10 @@ public class GetFlickrJsonData extends GetRawData {
 
                 Photo photoObject = new Photo(title, author, authorId, link, tags, photoUrl);
                 this.mPhotos.add(photoObject);
+            }
+
+            for (Photo singlePhoto: mPhotos) {
+                Log.v(LOG_TAG, singlePhoto.toString());
             }
 
         } catch (JSONException jsone) {
