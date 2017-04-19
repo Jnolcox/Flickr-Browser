@@ -58,7 +58,7 @@ public class GetFlickrJsonData extends GetRawData {
         }
 
         final String FLICKR_ITEMS = "items";
-        final String FLICKR_TITLE = "titel";
+        final String FLICKR_TITLE = "title";
         final String FLICKR_MEDIA = "media";
         final String FLICKR_PHOTO_URL = "m";
         final String FLICKR_AUTHOR = "author";
