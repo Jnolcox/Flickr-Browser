@@ -2,6 +2,7 @@ package com.example.john.flickrbrowser;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -12,16 +13,17 @@ public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = "MainActivity";
     private List<Photo> mPhotosList = new ArrayList<Photo>();
     private RecyclerView mRecyclerView;
-    private FlickrRecylerViewAdapter flickrRecylerViewAdapter;
+    private FlickrRecyclerViewAdapter flickrRecyclerViewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-//        GetRawData theRawData = new GetRawData("https://api.flickr.com/services/feeds/photos_public.gne?tags=nintendo,switch&format=json&lang=en-us&nojsoncallback=1");
-        GetFlickrJsonData jsonData = new GetFlickrJsonData("nintendo, switch, nintendoswitch, zelda, botw", true);
-        jsonData.execute();
+        ProcessPhotos processPhotos = new ProcessPhotos("Nintendo, switch", true);
+        processPhotos.execute();;
     }
 
     public class ProcessPhotos extends GetFlickrJsonData {
@@ -39,9 +41,10 @@ public class MainActivity extends AppCompatActivity {
 
             protected void onPostExecute(String webData) {
                 super.onPostExecute(webData);
-                flickrRecylerViewAdapter = new FlickrRecylerViewAdapter(MainActivity.this, getMPhotos());
-                mRecyclerView.setAdapter(flickrRecylerViewAdapter);
+                flickrRecyclerViewAdapter = new FlickrRecyclerViewAdapter(MainActivity.this, getMPhotos());
+                mRecyclerView.setAdapter(flickrRecyclerViewAdapter);
             }
         }
     }
 }
+//TODO: Figure out why its crashing
